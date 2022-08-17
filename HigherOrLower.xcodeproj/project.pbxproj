@@ -14,6 +14,8 @@
 		D31D0A4A289CE20F000682A0 /* HigherOrLowerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31D0A49289CE20F000682A0 /* HigherOrLowerTests.swift */; };
 		D31D0A54289CE20F000682A0 /* HigherOrLowerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31D0A53289CE20F000682A0 /* HigherOrLowerUITests.swift */; };
 		D31D0A56289CE20F000682A0 /* HigherOrLowerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31D0A55289CE20F000682A0 /* HigherOrLowerUITestsLaunchTests.swift */; };
+		D31D0A63289CE52E000682A0 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31D0A62289CE52E000682A0 /* Card.swift */; };
+		D31D0A69289CEABD000682A0 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31D0A68289CEABD000682A0 /* Modifiers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		D31D0A4F289CE20F000682A0 /* HigherOrLowerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HigherOrLowerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D31D0A53289CE20F000682A0 /* HigherOrLowerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HigherOrLowerUITests.swift; sourceTree = "<group>"; };
 		D31D0A55289CE20F000682A0 /* HigherOrLowerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HigherOrLowerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D31D0A62289CE52E000682A0 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		D31D0A68289CEABD000682A0 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +102,8 @@
 				D31D0A3A289CE20E000682A0 /* ContentView.swift */,
 				D31D0A3C289CE20F000682A0 /* Assets.xcassets */,
 				D31D0A3E289CE20F000682A0 /* Preview Content */,
+				D31D0A62289CE52E000682A0 /* Card.swift */,
+				D31D0A68289CEABD000682A0 /* Modifiers.swift */,
 			);
 			path = HigherOrLower;
 			sourceTree = "<group>";
@@ -257,7 +263,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D31D0A69289CEABD000682A0 /* Modifiers.swift in Sources */,
 				D31D0A3B289CE20E000682A0 /* ContentView.swift in Sources */,
+				D31D0A63289CE52E000682A0 /* Card.swift in Sources */,
 				D31D0A39289CE20E000682A0 /* HigherOrLowerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
