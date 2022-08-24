@@ -11,6 +11,7 @@ let iconList = ["ace", "two", "three", "four", "five", "six", "seven", "eight", 
 
 struct ContentView: View {
     @AppStorage("highscore") private var highscore = 0
+    @AppStorage("playingHighscore") private var playingHighscore = 0
     
     @State private var playerCards = [0, 1, 2]
     @State private var compCards = [0, 1, 2]
@@ -23,7 +24,8 @@ struct ContentView: View {
     
     @State private var start = false
     
-    @State private var animating = false
+    @State private var animatingChange = false
+    @State private var animatingFlip = false
     
     @State private var isGameover = false
     
@@ -63,7 +65,7 @@ struct ContentView: View {
     func guessRight() {
         self.coins += self.bets
         
-        if self.coins > self.highscore {
+        if self.coins > self.playingHighscore {
             self.updateHighscore()
         }
     }
@@ -76,7 +78,11 @@ struct ContentView: View {
     }
     
     func updateHighscore() {
-        self.highscore = self.coins
+        self.playingHighscore = self.coins
+        
+        if playingHighscore > highscore {
+            self.highscore = self.playingHighscore
+        }
     }
     
     func newGame() {
@@ -86,198 +92,271 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            Color("Blue")
+            Color("Blue400")
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
+                Text("Higher Or Lower")
+                    .font(.title)
+                    .fontWeight(.heavy)
+                    .foregroundColor(Color("Blue700"))
+                
+                Spacer()
+                
                 HStack {
+                    // MARK: HIGHSCORE
                     HStack {
                         Image("crown")
                             .resizable()
-                            .modifier(ArrowModifier())
+                            .modifier(ArrowMod())
                         
                         VStack(alignment: .leading) {
                             Text("Highscore")
-                                .font(.system(size: 12, design: .rounded))
-                                .foregroundColor(.black.opacity(0.5))
+                                .modifier(BadgeTitleMod())
                             
                             Text(String(highscore))
-                                .font(.system(size: 16, design: .rounded))
-                                .bold()
+                                .modifier(BadgeValueMod())
                         }
                     }
-                    .padding(.horizontal)
-                    .padding(.vertical, 10)
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .foregroundColor(.blue.opacity(0.1))
-                    )
+                    .modifier(BadgeMod())
                     
                     Spacer()
                     
+                    //  MARK: COINS
                     HStack {
                         Image("coin")
                             .resizable()
-                            .modifier(ArrowModifier())
+                            .modifier(ArrowMod())
                         
                         VStack(alignment: .leading) {
                             Text("Coins")
-                                .font(.system(size: 12, design: .rounded))
-                                .foregroundColor(.black.opacity(0.5))
+                                .modifier(BadgeTitleMod())
                             
                             Text(String(coins))
-                                .font(.system(size: 16, design: .rounded))
-                                .bold()
+                                .modifier(BadgeValueMod())
                         }
                     }
-                    .padding(.horizontal)
-                    .padding(.vertical, 10)
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .foregroundColor(.blue.opacity(0.1))
-                    )
+                    .modifier(BadgeMod())
                 }
                 
                 Spacer()
                 
                 VStack {
-                    HStack {
-                        if compShow {
-                            Image(iconList[compCards[0]])
-                                .resizable()
-                                .scaledToFit()
-                                .modifier(ShadowMod())
-                                .animation(.easeOut(duration: 2), value: compShow)
-                            Image(iconList[compCards[1]])
-                                .resizable()
-                                .scaledToFit()
-                                .modifier(ShadowMod())
-                                .animation(.easeOut(duration: 2), value: compShow)
-                            Image(iconList[compCards[2]])
-                                .resizable()
-                                .scaledToFit()
-                                .modifier(ShadowMod())
-                                .animation(.easeOut(duration: 2), value: compShow)
-                        } else {
-                            Card(iconName: "poker-cards")
-                            Card(iconName: "poker-cards")
-                            Card(iconName: "poker-cards")
+                    // MARK: COMPUTER
+                    ZStack{
+                        HStack {
+                            Group {
+                                Image(iconList[compCards[0]])
+                                    .resizable()
+                                Image(iconList[compCards[1]])
+                                    .resizable()
+                                Image(iconList[compCards[2]])
+                                    .resizable()
+                            }
+                            .modifier(CardMod())
+                            .opacity(animatingFlip ? 1 : 0)
+                            .rotationEffect(.degrees(animatingFlip ? 0 : 180))
+                            .animation(.easeOut(duration: 0.5), value: animatingFlip)
+                        }
+                        
+                        HStack {
+                            Group {
+                                Image("poker-cards")
+                                    .resizable()
+                                Image("poker-cards")
+                                    .resizable()
+                                Image("poker-cards")
+                                    .resizable()
+                            }
+                            .modifier(CardMod())
+                            .opacity(animatingFlip ? 0 : 1)
+                            .rotationEffect(.degrees(animatingFlip ? 180 : 0))
+                            .animation(.easeOut(duration: 0.5), value: animatingFlip)
                         }
                         
                     }
                     
-                    HStack {
-                        if start {
+                    // MARK: BUTTONS
+                    ZStack {
+                        HStack {
+                            // MARK: DOWN
                             Button {
+                                withAnimation {
+                                    self.animatingFlip = false
+                                }
+                                
                                 self.guessDown()
+                                
+                                withAnimation {
+                                    self.animatingFlip = true
+                                }
                             } label: {
                                 Image("down-arrow")
                                     .resizable()
-                                    .modifier(ArrowModifier())
-                            }
+                                    .opacity(start ? 1 : 0.5)
+                                    .modifier(ArrowMod())
+                            }.disabled(!start)
                             
+                            // MARK: PLAY
                             Button {
-                                self.guessUp()
-                            } label: {
-                                Image("up-arrow")
-                                    .resizable()
-                                    .modifier(ArrowModifier())
-                            }
-                        } else {
-                            Button {
+                                withAnimation {
+                                    self.animatingChange = false
+                                    self.animatingFlip = false
+                                }
+
                                 self.play()
+
+                                withAnimation {
+                                    self.animatingChange = true
+                                    self.animatingFlip = true
+                                }
+//                                isGameover = true
                             } label: {
                                 Image("play")
                                     .resizable()
-                                    .modifier(ArrowModifier())
-                            }
+                                    .opacity(start ? 0.5 : 1)
+                                    .modifier(ArrowMod())
+                            }.disabled(start)
+                            
+                            // MARK: UP
+                            Button {
+                                withAnimation {
+                                    self.animatingFlip = false
+                                }
+                                
+                                self.guessUp()
+                                
+                                withAnimation {
+                                    self.animatingFlip = true
+                                }
+                            } label: {
+                                Image("up-arrow")
+                                    .resizable()
+                                    .opacity(start ? 1 : 0.5)
+                                    .modifier(ArrowMod())
+                            }.disabled(!start)
                         }
                     }
                     
-                    HStack {
-                        if playerShow {
-                            Image(iconList[playerCards[0]])
-                                .resizable()
-                                .scaledToFit()
-                                .modifier(ShadowMod())
-                                .animation(.easeOut(duration: 2), value: playerShow)
-                            Image(iconList[playerCards[1]])
-                                .resizable()
-                                .scaledToFit()
-                                .modifier(ShadowMod())
-                                .animation(.easeOut(duration: 2), value: playerShow)
-                            Image(iconList[playerCards[2]])
-                                .resizable()
-                                .scaledToFit()
-                                .modifier(ShadowMod())
-                                .animation(.easeOut(duration: 2), value: playerShow)
-                        } else {
-                            Card(iconName: "poker-cards")
-                            Card(iconName: "poker-cards")
-                            Card(iconName: "poker-cards")
+                    // MARK: - PLAYER
+                    ZStack {
+                        HStack {
+                            Group {
+                                Image(iconList[playerCards[0]])
+                                    .resizable()
+                                Image(iconList[playerCards[1]])
+                                    .resizable()
+                                Image(iconList[playerCards[2]])
+                                    .resizable()
+                            }
+                            .modifier(CardMod())
+                            .opacity(animatingChange ? 1 : 0)
+                            .rotationEffect(.degrees(animatingChange ? 0 : 45))
+                            .animation(.easeOut(duration: 0.5), value: animatingChange)
+                            .onAppear(perform: {self.animatingChange.toggle()})
+                        }
+                        
+                        HStack {
+                            Group {
+                                Image("poker-cards")
+                                    .resizable()
+                                Image("poker-cards")
+                                    .resizable()
+                                Image("poker-cards")
+                                    .resizable()
+                            }
+                            .modifier(CardMod())
+                            .opacity(playerShow ? 0 : 1)
+                            
                         }
                     }
                 }
-                .padding(.vertical)
-                .background(
-                    RoundedRectangle(cornerRadius: 10)
-                        .foregroundColor(Color("Lightblue").opacity(0.3))
-                        .modifier(ShadowMod())
-                )
+                .padding()
+                .background(Color("Blue700"))
+                .cornerRadius(10)
+                .modifier(ShadowMod())
                 
                 Spacer()
-            } // VStack
+            }
             .padding()
             
             if isGameover {
+                // MARK: MODAL
                 ZStack{
-                    Color("Blue")
+                    Color(.black)
+                        .opacity(0.66)
                         .edgesIgnoringSafeArea(.all)
                     
+                    // MARK: MODAL CONTENT
                     VStack{
+                        // MARK: TITLE
                         Text("GAME OVER")
                             .font(.system(.title, design: .rounded))
                             .fontWeight(.heavy)
-                            .foregroundColor(Color.white)
-                            .padding()
-                            .frame(minWidth: 280, idealWidth: 280, maxWidth: 320)
+                            .foregroundColor(Color.white)                            .frame(minWidth: 280, idealWidth: 280, maxWidth: 320)
                             .background(Color("Red"))
                         
                         Spacer()
                         
+                        // MARK: BODY
                         VStack {
-                            Text("You lost all money!\nYou are not the god of gambler!\n Good luck next time!")
+                            Text("HIGHSCORE")
                                 .font(.system(.body, design: .rounded))
+                                .fontWeight(.bold)
                                 .foregroundColor(Color.white)
-                                .multilineTextAlignment(.center)
-                            
-                            Button {
-                                self.newGame()
-                            } label: {
-                                Text("New Game".uppercased())
-                                    .bold()
-                                    .foregroundColor(.white)
+                                .padding(.bottom)
+                            HStack {
+                                Text("This game: ")
+                                    .font(.system(.body, design: .rounded))
+                                    .foregroundColor(Color.white)
+                                Text(String(playingHighscore))
+                                    .font(.system(.body, design: .rounded))
+                                    .foregroundColor(Color.white)
+                            }.padding(.bottom, 5)
+                            HStack {
+                                Text("All time: ")
+                                    .font(.system(.body, design: .rounded))
+                                    .foregroundColor(Color.white)
+                                Text(String(highscore))
+                                    .font(.system(.body, design: .rounded))
+                                    .foregroundColor(Color.white)
                             }
-                            .padding(.vertical,10)
-                            .padding(.horizontal, 20)
-                            .background(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(lineWidth: 2)
-                                    .foregroundColor(Color("Blue").opacity(0.7))
-                            )
-                            
                         }
                         
                         Spacer()
+                        
+                        // MARK: BUTTON
+                        Button {
+                            self.newGame()
+                        } label: {
+                            Text("New Game")
+                                .fontWeight(.bold)
+                                .foregroundColor(Color("Blue700"))
+                        }
+                        .padding(.vertical, 15)
+                        .padding(.horizontal, 70)
+                        .background(Color("Yellow"))
+                        .cornerRadius(10)
+                        
                     }
-                    .frame(minWidth: 280, idealWidth: 280, maxWidth: 320, minHeight: 280, idealHeight: 300, maxHeight: 350, alignment: .center)
-                    .background(Color("Red"))
-                    .cornerRadius(20)
-                }
-            }//ZStack
+                    .padding(20)
+                    .opacity(isGameover ? 1 : 0)
+                    .frame(width:300, height: 320, alignment: .center)
+                    .background(Color("Blue700"))
+                    .cornerRadius(10)
+                    .animation(.easeOut(duration: 1), value: animatingChange)
+                    .onAppear(perform: {
+                        self.animatingChange.toggle()
+                    })
+                    .onDisappear(perform: {
+                        self.animatingChange.toggle()
+                    })
+                } //ZStack
+            }
         } // ZStack
-    }
+    } // ZStack
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
