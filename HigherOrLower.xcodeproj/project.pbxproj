@@ -16,7 +16,6 @@
 		B426068C28B8327D00E7523D /* cottagecore.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B426068B28B8327D00E7523D /* cottagecore.mp3 */; };
 		B437864328B72E5E005210F1 /* LeaderboardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437864228B72E5E005210F1 /* LeaderboardScreen.swift */; };
 		B437864528B72E6E005210F1 /* HowToPlayScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437864428B72E6E005210F1 /* HowToPlayScreen.swift */; };
-		B437864728B72E83005210F1 /* GameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437864628B72E83005210F1 /* GameScreen.swift */; };
 		B437864C28B7389E005210F1 /* LeaderboardBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437864B28B7389E005210F1 /* LeaderboardBar.swift */; };
 		B437864E28B74174005210F1 /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437864D28B74174005210F1 /* Badge.swift */; };
 		B44BB86128B71C58004650B2 /* MenuScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44BB86028B71C58004650B2 /* MenuScreen.swift */; };
@@ -28,6 +27,9 @@
 		D31D0A54289CE20F000682A0 /* HigherOrLowerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31D0A53289CE20F000682A0 /* HigherOrLowerUITests.swift */; };
 		D31D0A56289CE20F000682A0 /* HigherOrLowerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31D0A55289CE20F000682A0 /* HigherOrLowerUITestsLaunchTests.swift */; };
 		D31D0A69289CEABD000682A0 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31D0A68289CEABD000682A0 /* Modifiers.swift */; };
+		D399298728B8A764004A366D /* GameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D399298628B8A764004A366D /* GameScreen.swift */; };
+		D399298928B8B02F004A366D /* SettingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D399298828B8B02F004A366D /* SettingScreen.swift */; };
+		D399298B28B8B9E8004A366D /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = D399298A28B8B9E8004A366D /* Enums.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +59,6 @@
 		B426068B28B8327D00E7523D /* cottagecore.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cottagecore.mp3; sourceTree = "<group>"; };
 		B437864228B72E5E005210F1 /* LeaderboardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardScreen.swift; sourceTree = "<group>"; };
 		B437864428B72E6E005210F1 /* HowToPlayScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayScreen.swift; sourceTree = "<group>"; };
-		B437864628B72E83005210F1 /* GameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScreen.swift; sourceTree = "<group>"; };
 		B437864B28B7389E005210F1 /* LeaderboardBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardBar.swift; sourceTree = "<group>"; };
 		B437864D28B74174005210F1 /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
 		B44BB86028B71C58004650B2 /* MenuScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScreen.swift; sourceTree = "<group>"; };
@@ -72,6 +73,9 @@
 		D31D0A53289CE20F000682A0 /* HigherOrLowerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HigherOrLowerUITests.swift; sourceTree = "<group>"; };
 		D31D0A55289CE20F000682A0 /* HigherOrLowerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HigherOrLowerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D31D0A68289CEABD000682A0 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
+		D399298628B8A764004A366D /* GameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScreen.swift; sourceTree = "<group>"; };
+		D399298828B8B02F004A366D /* SettingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreen.swift; sourceTree = "<group>"; };
+		D399298A28B8B9E8004A366D /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,7 +121,8 @@
 				B44BB86028B71C58004650B2 /* MenuScreen.swift */,
 				B437864228B72E5E005210F1 /* LeaderboardScreen.swift */,
 				B437864428B72E6E005210F1 /* HowToPlayScreen.swift */,
-				B437864628B72E83005210F1 /* GameScreen.swift */,
+				D399298628B8A764004A366D /* GameScreen.swift */,
+				D399298828B8B02F004A366D /* SettingScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -127,6 +132,7 @@
 			children = (
 				D31D0A68289CEABD000682A0 /* Modifiers.swift */,
 				B426067828B82E6000E7523D /* PlaySound.swift */,
+				D399298A28B8B9E8004A366D /* Enums.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -336,16 +342,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D399298928B8B02F004A366D /* SettingScreen.swift in Sources */,
+				D399298728B8A764004A366D /* GameScreen.swift in Sources */,
 				B437864E28B74174005210F1 /* Badge.swift in Sources */,
 				B437864528B72E6E005210F1 /* HowToPlayScreen.swift in Sources */,
 				B426067728B8202B00E7523D /* MenuButton.swift in Sources */,
 				B437864C28B7389E005210F1 /* LeaderboardBar.swift in Sources */,
 				B426067928B82E6000E7523D /* PlaySound.swift in Sources */,
+				D399298B28B8B9E8004A366D /* Enums.swift in Sources */,
 				B44BB86128B71C58004650B2 /* MenuScreen.swift in Sources */,
 				D31D0A69289CEABD000682A0 /* Modifiers.swift in Sources */,
 				D31D0A3B289CE20E000682A0 /* ContentView.swift in Sources */,
 				D31D0A39289CE20E000682A0 /* HigherOrLowerApp.swift in Sources */,
-				B437864728B72E83005210F1 /* GameScreen.swift in Sources */,
 				B437864328B72E5E005210F1 /* LeaderboardScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

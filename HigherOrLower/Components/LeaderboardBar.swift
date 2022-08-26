@@ -1,9 +1,14 @@
-//
-//  LeaderboardBar.swift
-//  HigherOrLower
-//
-//  Created by Anh Nguyen on 8/25/22.
-//
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2022B
+  Assessment: Assignment 2
+  Author: Nguyen Anh Tuan
+  ID: 3817907
+  Created  date: 25/08/2022
+  Last modified: 26/08/2022
+  Acknowledgement: Acknowledge the resources that you use here.
+*/
 
 import SwiftUI
 
@@ -23,8 +28,6 @@ struct LeaderboardBar: View {
                 .frame(width: 40, height: 40, alignment: .center)
                 .background(darkText ? Color("Blue500") : .white)
                 .cornerRadius(100)
-                
-                
             
             Text(name)
                 .bold()
@@ -46,6 +49,7 @@ struct LeaderboardBar: View {
         .padding()
         .background(LinearGradient(colors: [Color(color), .white], startPoint: .leading, endPoint: .trailing))
         .cornerRadius(10)
+        .modifier(ShadowMod())
     }
 }
 

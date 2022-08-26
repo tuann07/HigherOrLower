@@ -1,9 +1,14 @@
-//
-//  MenuButton.swift
-//  HigherOrLower
-//
-//  Created by Anh Nguyen on 8/26/22.
-//
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2022B
+  Assessment: Assignment 2
+  Author: Nguyen Anh Tuan
+  ID: 3817907
+  Created  date: 26/08/2022
+  Last modified: 26/08/2022
+  Acknowledgement: Acknowledge the resources that you use here.
+*/
 
 import SwiftUI
 
@@ -15,7 +20,7 @@ struct MenuButton: View {
             .font(.system(.body, design: .rounded).weight(.bold))
             .foregroundColor(Color("Blue700"))
             .padding(.vertical)
-            .frame(width: 250, alignment: .center)
+            .frame(width: 300, alignment: .center)
             .background(Color("Blue300"))
             .cornerRadius(10)
             .modifier(ShadowMod())

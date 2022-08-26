@@ -1,9 +1,14 @@
-//
-//  ContentView.swift
-//  HigherOrLower
-//
-//  Created by Tuan Nguyen Anh on 05/08/2022.
-//
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2022B
+  Assessment: Assignment 2
+  Author: Nguyen Anh Tuan
+  ID: 3817907
+  Created  date: 05/08/2022
+  Last modified: 26/08/2022
+  Acknowledgement: Acknowledge the resources that you use here.
+*/
 
 import SwiftUI
 
@@ -283,7 +288,7 @@ struct ContentView: View {
             if isGameover {
                 // MARK: MODAL
                 ZStack{
-                    Color(.black)
+                    Color("Blue700")
                         .opacity(0.66)
                         .edgesIgnoringSafeArea(.all)
                     

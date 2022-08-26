@@ -1,9 +1,14 @@
-//
-//  Modifiers.swift
-//  HigherOrLower
-//
-//  Created by Tuan Nguyen Anh on 05/08/2022.
-//
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2022B
+  Assessment: Assignment 2
+  Author: Nguyen Anh Tuan
+  ID: 3817907
+  Created  date: 05/08/2022
+  Last modified: 26/08/2022
+  Acknowledgement: Acknowledge the resources that you use here.
+*/
 
 import SwiftUI
 
@@ -18,7 +23,7 @@ struct ArrowMod: ViewModifier {
 struct ShadowMod: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .shadow(color: .black.opacity(0.1), radius: 10)
+            .shadow(color: Color("Blue700").opacity(0.1), radius: 10)
     }
 }
 
@@ -38,7 +43,7 @@ struct BadgeTitleMod: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.system(size: 12, design: .rounded))
-            .foregroundColor(.black.opacity(0.5))
+            .foregroundColor(Color("Blue700").opacity(0.5))
     }
 }
 
