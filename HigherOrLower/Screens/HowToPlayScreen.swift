@@ -28,21 +28,21 @@ struct HowToPlayScreen: View {
                     
                     Divider()
                     
-                    Text("Take a guess if your sum is greater or smaller than the opponents' by clicking on either arrow")
+                    Text("Take a guess if your sum is greater or smaller than the opponents' by clicking on up or down arrow")
                         .font(.system(.body, design: .rounded))
                         .foregroundColor(Color("Blue700").opacity(0.8))
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
                     Divider()
                     
-                    Text("Click the play button to have another guess")
+                    Text("Click the play button to have guess again")
                         .font(.system(.body, design: .rounded))
                         .foregroundColor(Color("Blue700").opacity(0.8))
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
                     Divider()
                     
-                    Text("You can choose to gamble more by double the bets or go all in")
+                    Text("You can choose to gamble more by doubling the bets or going all in")
                         .font(.system(.body, design: .rounded))
                         .foregroundColor(Color("Blue700").opacity(0.8))
                         .frame(maxWidth: .infinity, alignment: .leading)

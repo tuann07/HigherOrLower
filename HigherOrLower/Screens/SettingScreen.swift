@@ -13,7 +13,7 @@
 import SwiftUI
 
 struct SettingScreen: View {
-    @AppStorage("username") private var name = "player1"
+    @AppStorage("username") private var username = "player1"
     @AppStorage("difficulty") private var difficulty = Difficulty.easy
     
     var body: some View {
@@ -25,7 +25,7 @@ struct SettingScreen: View {
                 VStack {
                     Text("Change your username")
                         .bold()
-                    TextField("Username", text: $name)
+                    TextField("Username", text: $username)
                         .padding()
                         .frame(width: 320, alignment: .center)
                         .background(Color("Blue300"))
