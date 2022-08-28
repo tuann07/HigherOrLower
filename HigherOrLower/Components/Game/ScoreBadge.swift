@@ -37,8 +37,8 @@ struct ScoreBadge: View {
         .padding(.vertical, 10)
         .frame(maxWidth: 200, alignment: .leading)
         .background(Color("Blue300"))
+        .cornerRadius(10)
         .shadow(color: highlight ? Color("Yellow") : Color("Blue700").opacity(0.1), radius: 10)
-        .modifier(CornerMod())
     }
 }
 

@@ -37,6 +37,8 @@ struct GameScreen: View {
     
     // randomize card
     func play() {
+        playSound(sound: "play-cards", type: "wav")
+        
         self.start = true
         self.isFaceUp = false
         
@@ -77,6 +79,7 @@ struct GameScreen: View {
     // guess logic
     func guessRight() {
         playSound(sound: "guess-right", type: "wav")
+        
         self.coins += self.bets
         
         if self.coins > self.playingHighscore {
@@ -85,6 +88,7 @@ struct GameScreen: View {
     }
     func guessWrong() {
         playSound(sound: "guess-wrong", type: "wav")
+        
         self.coins -= self.bets
         
         if self.coins <= 0 {

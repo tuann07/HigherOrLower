@@ -36,6 +36,7 @@
 		D3F4A44F28BB592600B46229 /* GameoverModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4A44E28BB592600B46229 /* GameoverModal.swift */; };
 		D3F4A45828BB5F3800B46229 /* HowToPlayText.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4A45728BB5F3800B46229 /* HowToPlayText.swift */; };
 		D3F4A45B28BB5FF900B46229 /* SettingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4A45A28BB5FF900B46229 /* SettingButton.swift */; };
+		D3F4A45D28BB6EB000B46229 /* play-cards.wav in Resources */ = {isa = PBXBuildFile; fileRef = D3F4A45C28BB6EB000B46229 /* play-cards.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,7 @@
 		D3F4A44E28BB592600B46229 /* GameoverModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameoverModal.swift; sourceTree = "<group>"; };
 		D3F4A45728BB5F3800B46229 /* HowToPlayText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayText.swift; sourceTree = "<group>"; };
 		D3F4A45A28BB5FF900B46229 /* SettingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingButton.swift; sourceTree = "<group>"; };
+		D3F4A45C28BB6EB000B46229 /* play-cards.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "play-cards.wav"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 				B426068628B8309900E7523D /* guess-right.wav */,
 				B426068328B8309800E7523D /* guess-wrong.wav */,
 				B426068428B8309800E7523D /* new-highscore.wav */,
+				D3F4A45C28BB6EB000B46229 /* play-cards.wav */,
 				B426068528B8309800E7523D /* sad-gameover.wav */,
 			);
 			path = Sounds;
@@ -379,6 +382,7 @@
 			files = (
 				B426068C28B8327D00E7523D /* cottagecore.mp3 in Resources */,
 				B426068828B8309900E7523D /* new-highscore.wav in Resources */,
+				D3F4A45D28BB6EB000B46229 /* play-cards.wav in Resources */,
 				B426068A28B8309900E7523D /* guess-right.wav in Resources */,
 				B426068728B8309900E7523D /* guess-wrong.wav in Resources */,
 				B426068928B8309900E7523D /* sad-gameover.wav in Resources */,
