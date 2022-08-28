@@ -6,15 +6,15 @@
   Author: Nguyen Anh Tuan
   ID: 3817907
   Created  date: 26/08/2022
-  Last modified: 26/08/2022
+  Last modified: 28/08/2022
   Acknowledgement: Acknowledge the resources that you use here.
 */
 
 import SwiftUI
 
 struct SettingScreen: View {
-    @AppStorage("username") private var username = "player1"
-    @AppStorage("difficulty") private var difficulty = Difficulty.easy
+    @AppStorage(AppStorageKeys.username.rawValue) private var username = usernameDefault
+    @AppStorage(AppStorageKeys.difficulty.rawValue) private var difficulty = Difficulty.easy
     
     var body: some View {
         ZStack {
@@ -25,18 +25,19 @@ struct SettingScreen: View {
                 VStack {
                     Text("Change your username")
                         .bold()
+                        .foregroundColor(Color("Blue700"))
+                    
                     TextField("Username", text: $username)
                         .padding()
-                        .frame(width: 320, alignment: .center)
                         .background(Color("Blue300"))
-                        .cornerRadius(10)
-                        .modifier(ShadowMod())
+                        .modifier(CornerMod())
                 }
                 .padding(.bottom)
                 
                 VStack {
                     Text("Change difficulty")
                         .bold()
+                        .foregroundColor(Color("Blue700"))
                     
                     HStack {
                         Spacer()
@@ -44,13 +45,7 @@ struct SettingScreen: View {
                         Button {
                             difficulty = Difficulty.easy
                         } label: {
-                            Text("Easy")
-                                .bold()
-                                .foregroundColor(Color("Blue700"))
-                                .padding()
-                                .background(difficulty == Difficulty.easy ? Color("Yellow") : Color("Blue300"))
-                                .cornerRadius(10)
-                                .modifier(ShadowMod())
+                            SettingButton(text: "Easy", difficulty: Difficulty.easy)
                         }
                         
                         Spacer()
@@ -58,19 +53,14 @@ struct SettingScreen: View {
                         Button {
                             difficulty = Difficulty.hard
                         } label: {
-                            Text("Hard")
-                                .bold()
-                                .foregroundColor(Color("Blue700"))
-                                .padding()
-                                .background(difficulty == Difficulty.hard ? Color("Yellow") : Color("Blue300"))
-                                .cornerRadius(10)
-                                .modifier(ShadowMod())
+                            SettingButton(text: "Hard", difficulty: Difficulty.hard)
                         }
                         
                         Spacer()
                     }
                 }
             }
+            .modifier(ScreenMod())
         }
         .navigationTitle("Settings")
         

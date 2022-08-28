@@ -6,7 +6,7 @@
   Author: Nguyen Anh Tuan
   ID: 3817907
   Created  date: 25/08/2022
-  Last modified: 26/08/2022
+  Last modified: 28/08/2022
   Acknowledgement: Acknowledge the resources that you use here.
 */
 
@@ -21,40 +21,28 @@ struct HowToPlayScreen: View {
             VStack {
                 
                 VStack {
-                    Text("You are given 3 cards, calculate the sum of those cards")
-                        .font(.system(.body, design: .rounded))
-                        .foregroundColor(Color("Blue700").opacity(0.8))
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                    HowToPlayText(text: "You are given 3 cards, calculate the sum of those cards")
                     
                     Divider()
                     
-                    Text("Take a guess if your sum is greater or smaller than the opponents' by clicking on up or down arrow")
-                        .font(.system(.body, design: .rounded))
-                        .foregroundColor(Color("Blue700").opacity(0.8))
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                    HowToPlayText(text: "Take a guess if your sum is greater or smaller than the opponents' by clicking on up or down arrow")
                     
                     Divider()
                     
-                    Text("Click the play button to have guess again")
-                        .font(.system(.body, design: .rounded))
-                        .foregroundColor(Color("Blue700").opacity(0.8))
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                    HowToPlayText(text: "Click the play button to guess again")
                     
                     Divider()
                     
-                    Text("You can choose to gamble more by doubling the bets or going all in")
-                        .font(.system(.body, design: .rounded))
-                        .foregroundColor(Color("Blue700").opacity(0.8))
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                    HowToPlayText(text: "You can choose to gamble more by doubling the bets or going all in")
                     
                 }
                 .padding()
-                .frame(width: 300, alignment: .center)
                 .background(Color("Blue300"))
-                .cornerRadius(10)
+                .modifier(CornerMod())
                 
                 Spacer()
             }
+            .modifier(ScreenMod())
         }
         .navigationTitle("How To Play")
     }

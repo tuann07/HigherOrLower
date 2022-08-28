@@ -6,13 +6,13 @@
   Author: Nguyen Anh Tuan
   ID: 3817907
   Created  date: 25/08/2022
-  Last modified: 26/08/2022
+  Last modified: 28/08/2022
   Acknowledgement: Acknowledge the resources that you use here.
 */
 
 import SwiftUI
 
-struct Badge: View {
+struct ScoreBadge: View {
     var imageName: String
     var title: String
     var number: String
@@ -22,27 +22,28 @@ struct Badge: View {
         HStack {
             Image(imageName)
                 .resizable()
-                .modifier(ArrowMod())
+                .modifier(IconMod())
             
             VStack(alignment: .leading) {
                 Text(title)
-                    .modifier(BadgeTitleMod())
+                    .font(.system(size: 12, design: .rounded))
+                    .foregroundColor(Color("Blue700").opacity(0.5))
                 
                 Text(number)
-                    .modifier(BadgeValueMod())
+                    .font(.system(size: 16, design: .rounded).weight(.bold))
             }
         }
         .padding(.horizontal)
         .padding(.vertical, 10)
-        .frame(width: 150, alignment: .leading)
+        .frame(maxWidth: 200, alignment: .leading)
         .background(Color("Blue300"))
-        .cornerRadius(10)
         .shadow(color: highlight ? Color("Yellow") : Color("Blue700").opacity(0.1), radius: 10)
+        .modifier(CornerMod())
     }
 }
 
-struct StatBadge_Previews: PreviewProvider {
+struct ScoreBadge_Previews: PreviewProvider {
     static var previews: some View {
-        Badge(imageName: "crown", title: "Highscore", number: "19023", highlight: true)
+        ScoreBadge(imageName: "crown", title: "Highscore", number: "19023", highlight: true)
     }
 }

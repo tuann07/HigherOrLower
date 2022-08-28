@@ -1,14 +1,14 @@
 /*
-  RMIT University Vietnam
-  Course: COSC2659 iOS Development
-  Semester: 2022B
-  Assessment: Assignment 2
-  Author: Nguyen Anh Tuan
-  ID: 3817907
-  Created  date: 26/08/2022
-  Last modified: 26/08/2022
-  Acknowledgement: Acknowledge the resources that you use here.
-*/
+ RMIT University Vietnam
+ Course: COSC2659 iOS Development
+ Semester: 2022B
+ Assessment: Assignment 2
+ Author: Nguyen Anh Tuan
+ ID: 3817907
+ Created  date: 26/08/2022
+ Last modified: 28/08/2022
+ Acknowledgement: All images are made by bearicons at flaticon.com
+ */
 
 import SwiftUI
 
@@ -16,35 +16,30 @@ let iconList = ["ace", "two", "three", "four", "five", "six", "seven", "eight", 
 let baseBet = 10
 
 struct GameScreen: View {
-    @AppStorage("username") private var username = "player1"
-    @AppStorage("highscore") private var highscore = 100
-    @AppStorage("playing-highscore") private var playingHighscore = 100
+    @AppStorage(AppStorageKeys.difficulty.rawValue) private var difficulty = Difficulty.easy
+    @AppStorage(AppStorageKeys.username.rawValue) private var username = usernameDefault
+    @AppStorage(AppStorageKeys.highscore.rawValue) private var highscore = coinsDefault
+    @AppStorage(AppStorageKeys.playingHighscore.rawValue) private var playingHighscore = coinsDefault
+    @AppStorage(AppStorageKeys.coins.rawValue) private var coins = coinsDefault
+    @State private var bets = 10
     
     @State private var playerCards = [0, 1, 2]
     @State private var compCards = [0, 1, 2]
     
-    @State private var compShow = false
-    
-    @State private var playerShow = false
-    @AppStorage("coins") private var coins = 100
-    @State private var bets = 10
-    
-    @State private var x2Choosen = false
-    @State private var allInChoosen = false
-    
     @State private var start = false
-    
+    @State private var isFaceUp = false
     @State private var isGameover = false
+    
+    @State private var isX2 = false
+    @State private var isAllIn = false
     
     @State private var animating = false
     
+    // randomize card
     func play() {
-        playingHighscore = highscore + 1000
-        isGameover = true
-        
         self.start = true
-        self.compShow = false
-        self.playerShow = true
+        self.isFaceUp = false
+        
         self.playerCards = self.playerCards.map({ _ in
             Int.random(in: 0..<iconList.count)
         })
@@ -53,12 +48,13 @@ struct GameScreen: View {
         })
     }
     
+    // calculate bets and sum
     func guess() -> [Int]{
-        if (self.allInChoosen) {
-            bets = coins
+        if (self.isAllIn) {
+            self.bets = self.coins
         }
         self.start = false
-        self.compShow = true
+        self.isFaceUp = true
         
         let playerSum = self.playerCards[0] + self.playerCards[1] + self.playerCards[2]
         let compSum = self.compCards[0] + self.compCards[1] + self.compCards[2]
@@ -66,17 +62,19 @@ struct GameScreen: View {
         return [playerSum, compSum]
     }
     
+    // user guess
     func guessUp() {
         let guesses = self.guess()
         
-        guesses[0] > guesses[1] ? guessRight() : guessWrong()
+        guesses[0] > guesses[1] ? self.guessRight() : self.guessWrong()
     }
     func guessDown() {
         let guesses = self.guess()
         
-        guesses[0] < guesses[1] ? guessRight() : guessWrong()
+        guesses[0] < guesses[1] ? self.guessRight() : self.guessWrong()
     }
     
+    // guess logic
     func guessRight() {
         playSound(sound: "guess-right", type: "wav")
         self.coins += self.bets
@@ -87,60 +85,67 @@ struct GameScreen: View {
     }
     func guessWrong() {
         playSound(sound: "guess-wrong", type: "wav")
-        self.coins -= bets
+        self.coins -= self.bets
         
         if self.coins <= 0 {
             self.isGameover = true
         }
     }
     
+    // updates
     func updatePlayingHighscore() {
         self.playingHighscore = self.coins
     }
-    
     func updateHighscore() {
-        if playingHighscore > highscore {
+        if self.playingHighscore > self.highscore {
             self.highscore = self.playingHighscore
         }
     }
+    
+    // save highscore to leaderboard
     func saveToLeaderboard() {
         var leaderboard = UserDefaults.standard.object(forKey: "leaderboard") as? [String: Int] ?? [:]
-        leaderboard[username] = playingHighscore
+        leaderboard[self.username] = self.playingHighscore
         UserDefaults.standard.set(leaderboard, forKey: "leaderboard")
     }
     
+    // reset game
     func newGame() {
         self.saveToLeaderboard()
         self.updateHighscore()
         self.isGameover = false
-        self.coins = 100
-        self.playingHighscore = 100
+        self.coins = coinsDefault
+        self.playingHighscore = coinsDefault
     }
     
+    // bets change
     func x2Select() {
-        self.x2Choosen.toggle()
-        self.allInChoosen = false
+        self.isX2.toggle()
+        self.isAllIn = false
         
-        if (x2Choosen) {
-            bets = baseBet * 2
+        if (isX2) {
+            self.bets = baseBet * 2
         } else {
-            bets = baseBet
+            self.bets = baseBet
         }
     }
-    
     func allInSelect() {
-        self.allInChoosen.toggle()
-        self.x2Choosen = false
+        self.isAllIn.toggle()
+        self.isX2 = false
         
-        if (allInChoosen) {
-            bets = coins
+        if (isAllIn) {
+            self.bets = coins
         } else {
-            bets = baseBet
+            self.bets = baseBet
         }
     }
     
+    // checks
     func isNewHighscore() -> Bool {
         return playingHighscore > highscore
+    }
+    func isHardMode() -> Bool {
+        return difficulty == Difficulty.hard
     }
     
     var body: some View {
@@ -149,50 +154,74 @@ struct GameScreen: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
+                Spacer()
+                
                 HStack {
                     // MARK: HIGHSCORE
-                    Badge(imageName: "crown", title: "Highscore", number: String(isNewHighscore() ? playingHighscore : highscore), highlight: isNewHighscore())
+                    ScoreBadge(imageName: "crown", title: "Highscore", number: String(isNewHighscore() ? playingHighscore : highscore), highlight: isNewHighscore())
                     
                     Spacer()
                     
                     //  MARK: COINS
-                    Badge(imageName: "coin", title: "Coins", number: String(coins))
+                    ScoreBadge(imageName: "coin", title: "Coins", number: String(coins))
                 }
                 
                 Spacer()
                 
                 VStack {
                     // MARK: COMPUTER
-                    ZStack{
-                        HStack {
-                            Group {
-                                Image(iconList[compCards[0]])
-                                    .resizable()
-                                Image(iconList[compCards[1]])
-                                    .resizable()
-                                Image(iconList[compCards[2]])
-                                    .resizable()
-                            }
-                            .modifier(CardMod())
-                            .opacity(compShow ? 1 : 0)
-                            .rotationEffect(.degrees(compShow ? 0 : 90))
-                            .animation(.easeOut(duration: 0.5), value: compShow)
+                    HStack {
+                        ZStack {
+                            Image(iconList[compCards[0]])
+                                .resizable()
+                                .modifier(CardMod())
+                                .opacity(isFaceUp ? 1 : 0)
+                                .rotationEffect(.degrees(isFaceUp ? 0 : 90))
+                                .animation(.easeOut(duration: 0.5), value: isFaceUp)
+                            
+                            Image("poker-cards")
+                                .resizable()
+                                .modifier(CardMod())
+                                .opacity(isFaceUp ? 0 : 1)
+                                .rotationEffect(.degrees(isFaceUp ? 90 : 0))
+                                .animation(.easeOut(duration: 0.3), value: isFaceUp)
                         }
                         
-                        HStack {
-                            Group {
+                        ZStack {
+                            Image(iconList[compCards[1]])
+                                .resizable()
+                                .modifier(CardMod())
+                                .opacity(isHardMode() ? (animating ? 0 : 1) : (isFaceUp ? 1 : 0))
+                                .offset(y: isHardMode() ? (animating ? 50 : 0) : 0)
+                                .rotationEffect(.degrees(isHardMode() ? 0 : (isFaceUp ? 0 : 90)))
+                                .animation(.easeOut(duration: 0.5), value: isHardMode() ? animating : isFaceUp)
+                            
+                            if !isHardMode() {
                                 Image("poker-cards")
                                     .resizable()
-                                Image("poker-cards")
-                                    .resizable()
-                                Image("poker-cards")
-                                    .resizable()
+                                    .modifier(CardMod())
+                                    .opacity(isFaceUp ? 0 : 1)
+                                    .rotationEffect(.degrees(isFaceUp ? 90 : 0))
+                                    .animation(.easeOut(duration: 0.3), value: isFaceUp)
                             }
-                            .modifier(CardMod())
-                            .opacity(compShow ? 0 : 1)
-                            .rotationEffect(.degrees(compShow ? 90 : 0))
-                            .animation(.easeOut(duration: 0.3), value: compShow)
                         }
+                        
+                        ZStack {
+                            Image(iconList[compCards[2]])
+                                .resizable()
+                                .modifier(CardMod())
+                                .opacity(isFaceUp ? 1 : 0)
+                                .rotationEffect(.degrees(isFaceUp ? 0 : 90))
+                                .animation(.easeOut(duration: 0.5), value: isFaceUp)
+                            
+                            Image("poker-cards")
+                                .resizable()
+                                .modifier(CardMod())
+                                .opacity(isFaceUp ? 0 : 1)
+                                .rotationEffect(.degrees(isFaceUp ? 90 : 0))
+                                .animation(.easeOut(duration: 0.3), value: isFaceUp)
+                        }
+                        
                         
                     }
                     
@@ -206,7 +235,7 @@ struct GameScreen: View {
                                 Image("down-arrow")
                                     .resizable()
                                     .opacity(start ? 1 : 0.5)
-                                    .modifier(ArrowMod())
+                                    .modifier(IconMod())
                             }.disabled(!start)
                             
                             // MARK: PLAY
@@ -222,7 +251,7 @@ struct GameScreen: View {
                                 Image("play")
                                     .resizable()
                                     .opacity(start ? 0.5 : 1)
-                                    .modifier(ArrowMod())
+                                    .modifier(IconMod())
                             }.disabled(start)
                             
                             // MARK: UP
@@ -232,37 +261,54 @@ struct GameScreen: View {
                                 Image("up-arrow")
                                     .resizable()
                                     .opacity(start ? 1 : 0.5)
-                                    .modifier(ArrowMod())
+                                    .modifier(IconMod())
                             }.disabled(!start)
                         }
                     }
                     
-                    // MARK: - PLAYER
-                    ZStack {
-                        HStack {
-                            Group {
-                                Image(iconList[playerCards[0]])
-                                    .resizable()
-                                Image(iconList[playerCards[1]])
-                                    .resizable()
-                                Image(iconList[playerCards[2]])
-                                    .resizable()
-                            }
+                    // MARK: PLAYER
+                    HStack {
+                        Image(iconList[playerCards[0]])
+                            .resizable()
                             .modifier(CardMod())
                             .opacity(animating ? 0 : 1)
                             .offset(y: animating ? 50 : 0)
                             .animation(.easeOut(duration: 0.5), value: animating)
+                        
+                        ZStack {
+                            Image(iconList[playerCards[1]])
+                                .resizable()
+                                .modifier(CardMod())
+                                .opacity(isHardMode() ? (isFaceUp ? 1 : 0) : (animating ? 0 : 1))
+                                .offset(y: isHardMode() ? 0 : (animating ? 50 : 0))
+                                .rotationEffect(.degrees(isHardMode() ? (isFaceUp ? 0 : 90) : 0))
+                                .animation(.easeOut(duration: 0.5), value: isHardMode() ? isFaceUp : animating)
+                            
+                            if isHardMode() {
+                                Image("poker-cards")
+                                    .resizable()
+                                    .modifier(CardMod())
+                                    .opacity(isFaceUp ? 0 : 1)
+                                    .rotationEffect(.degrees(isFaceUp ? 90 : 0))
+                                    .animation(.easeOut(duration: 0.3), value: isFaceUp)
+                            }
                         }
+                        
+                        Image(iconList[playerCards[2]])
+                            .resizable()
+                            .modifier(CardMod())
+                            .opacity(animating ? 0 : 1)
+                            .offset(y: animating ? 50 : 0)
+                            .animation(.easeOut(duration: 0.5), value: animating)
                     }
                 }
                 .padding()
                 .background(Color("Blue700"))
-                .cornerRadius(10)
-                .modifier(ShadowMod())
+                .modifier(CornerMod())
                 
                 Spacer()
                 
-                // MARK: BUFF
+                // MARK: BETS
                 HStack {
                     Spacer()
                     
@@ -274,9 +320,8 @@ struct GameScreen: View {
                             .foregroundColor(Color("Blue700"))
                     }
                     .padding()
-                    .background(Color(x2Choosen ? "Yellow" : "Blue300"))
-                    .cornerRadius(10)
-                    .modifier(ShadowMod())
+                    .background(Color(self.isX2 ? "Yellow" : "Blue300"))
+                    .modifier(CornerMod())
                     
                     Spacer()
                     
@@ -288,86 +333,19 @@ struct GameScreen: View {
                             .foregroundColor(Color("Blue700"))
                     }
                     .padding()
-                    .background(Color(allInChoosen ? "Yellow" : "Blue300"))
-                    .cornerRadius(10)
-                    .modifier(ShadowMod())
+                    .background(Color(self.isAllIn ? "Yellow" : "Blue300"))
+                    .modifier(CornerMod())
                     
                     Spacer()
                 }
+                
+                Spacer()
             }
-            .padding()
+            .modifier(ScreenMod())
             
-            if isGameover {
-                // MARK: MODAL
-                ZStack{
-                    Color(.black)
-                        .opacity(0.66)
-                        .edgesIgnoringSafeArea(.all)
-                    
-                    // MARK: MODAL CONTENT
-                    VStack{
-                        // MARK: TITLE
-                        Text(isNewHighscore() ? "Congratulation" : "GAME OVER")
-                            .font(.system(.title, design: .rounded))
-                            .fontWeight(.heavy)
-                            .foregroundColor(Color.white)
-                            .frame(minWidth: 280, idealWidth: 280, maxWidth: 320)
-                            .background(Color("Red"))
-                        
-                        Spacer()
-                        
-                        // MARK: BODY
-                        VStack {
-                            Text(isNewHighscore() ? "You set a new highscore.\nKeep up the good work." : "You almost got there.\nGive it another try.")
-                                .font(.system(.body, design: .rounded))
-                                .foregroundColor(Color.white)
-                                .padding(.bottom)
-                                .multilineTextAlignment(.center)
-                            
-                            Text("Highscore")
-                                .font(.system(.body, design: .rounded))
-                                .fontWeight(.bold)
-                                .foregroundColor(Color.white)
-                                .padding(.bottom, 5)
-                            
-                            Text("This game: " + String(playingHighscore))
-                                .font(.system(.body, design: .rounded))
-                                .foregroundColor(Color.white)
-                            
-                            Text("All time: " + String(highscore))
-                                .font(.system(.body, design: .rounded))
-                                .foregroundColor(Color.white)
-                            
-                        }
-                        
-                        Spacer()
-                        
-                        // MARK: BUTTON
-                        Button {
-                            self.newGame()
-                        } label: {
-                            Text("New Game")
-                                .fontWeight(.bold)
-                                .foregroundColor(Color("Blue700"))
-                                .padding(.vertical, 15)
-                                .padding(.horizontal, 70)
-                                .background(Color("Yellow"))
-                                .cornerRadius(10)
-                        }
-                    }
-                    .padding(20)
-                    .opacity(isGameover ? 1 : 0)
-                    .frame(width:320, height: 380, alignment: .center)
-                    .background(Color("Blue700"))
-                    .cornerRadius(10)
-                } //ZStack
-                .onAppear(perform: {
-                    if isNewHighscore() {
-                        playSound(sound: "new-highscore", type: "wav")
-                    } else {
-                        playSound(sound: "sad-gameover", type: "wav")
-                    }
-                })
+            // MARK: MODAL
+            if self.isGameover {
+                GameoverModal(highscore: self.highscore, playingHighscore: self.playingHighscore, isGameover: self.isGameover, isNewHighscore: self.isNewHighscore, newGame: self.newGame)
             }
         } // ZStack
         .navigationTitle("Higher Or Lower")

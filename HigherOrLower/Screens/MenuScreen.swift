@@ -6,15 +6,15 @@
   Author: Nguyen Anh Tuan
   ID: 3817907
   Created  date: 25/08/2022
-  Last modified: 26/08/2022
+  Last modified: 28/08/2022
   Acknowledgement: Acknowledge the resources that you use here.
 */
 
 import SwiftUI
 
 struct MenuScreen: View {
-    @AppStorage("coins") private var coins = 100
-    @AppStorage("playingHighscore") private var playingHighscore = 100
+    @AppStorage(AppStorageKeys.coins.rawValue) private var coins = coinsDefault
+    @AppStorage(AppStorageKeys.playingHighscore.rawValue) private var playingHighscore = coinsDefault
     
     var body: some View {
         NavigationView {
@@ -39,13 +39,12 @@ struct MenuScreen: View {
                     NavigationLink {
                         GameScreen()
                             .onAppear(perform: {
-                                coins = 100
-                                playingHighscore = 100
+                                coins = coinsDefault
+                                playingHighscore = coinsDefault
                             })
                     } label: {
                         MenuButton(text: "New Game")
                     }
-                    
                     
                     NavigationLink {
                         LeaderboardScreen()
@@ -54,9 +53,9 @@ struct MenuScreen: View {
                     }
                     
                     NavigationLink {
-                        HowToPlayScreen()
+                        AchievementScreen()
                     } label: {
-                        MenuButton(text: "How To Play")
+                        MenuButton(text: "Achievements")
                     }
                     
                     NavigationLink {
@@ -65,19 +64,28 @@ struct MenuScreen: View {
                         MenuButton(text: "Settings")
                     }
                     
+                    NavigationLink {
+                        HowToPlayScreen()
+                    } label: {
+                        MenuButton(text: "How To Play")
+                    }
+                    
                     Spacer()
                 }
+                .modifier(ScreenMod())
             }
             .navigationBarTitleDisplayMode(.inline)
             .onAppear(perform: {
                 playSound(sound: "cottagecore", type: "mp3")
             })
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
 struct MenuScreen_Previews: PreviewProvider {
     static var previews: some View {
         MenuScreen()
+            .previewInterfaceOrientation(.portrait)
     }
 }

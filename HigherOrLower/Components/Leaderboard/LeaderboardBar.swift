@@ -6,7 +6,7 @@
   Author: Nguyen Anh Tuan
   ID: 3817907
   Created  date: 25/08/2022
-  Last modified: 26/08/2022
+  Last modified: 28/08/2022
   Acknowledgement: Acknowledge the resources that you use here.
 */
 
@@ -45,11 +45,9 @@ struct LeaderboardBar: View {
                 .background(Color(color))
                 .cornerRadius(20)
         }
-        .frame(width: 300, alignment: .center)
         .padding()
         .background(LinearGradient(colors: [Color(color), .white], startPoint: .leading, endPoint: .trailing))
-        .cornerRadius(10)
-        .modifier(ShadowMod())
+        .modifier(CornerMod())
     }
 }
 

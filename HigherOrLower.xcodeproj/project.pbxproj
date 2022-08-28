@@ -17,7 +17,7 @@
 		B437864328B72E5E005210F1 /* LeaderboardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437864228B72E5E005210F1 /* LeaderboardScreen.swift */; };
 		B437864528B72E6E005210F1 /* HowToPlayScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437864428B72E6E005210F1 /* HowToPlayScreen.swift */; };
 		B437864C28B7389E005210F1 /* LeaderboardBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437864B28B7389E005210F1 /* LeaderboardBar.swift */; };
-		B437864E28B74174005210F1 /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437864D28B74174005210F1 /* Badge.swift */; };
+		B437864E28B74174005210F1 /* ScoreBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437864D28B74174005210F1 /* ScoreBadge.swift */; };
 		B44BB86128B71C58004650B2 /* MenuScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44BB86028B71C58004650B2 /* MenuScreen.swift */; };
 		D31D0A39289CE20E000682A0 /* HigherOrLowerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31D0A38289CE20E000682A0 /* HigherOrLowerApp.swift */; };
 		D31D0A3B289CE20E000682A0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31D0A3A289CE20E000682A0 /* ContentView.swift */; };
@@ -30,6 +30,12 @@
 		D399298728B8A764004A366D /* GameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D399298628B8A764004A366D /* GameScreen.swift */; };
 		D399298928B8B02F004A366D /* SettingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D399298828B8B02F004A366D /* SettingScreen.swift */; };
 		D399298B28B8B9E8004A366D /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = D399298A28B8B9E8004A366D /* Enums.swift */; };
+		D3F4A44828BB45E300B46229 /* AchievementBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4A44728BB45E300B46229 /* AchievementBadge.swift */; };
+		D3F4A44A28BB496A00B46229 /* AchievementScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4A44928BB496A00B46229 /* AchievementScreen.swift */; };
+		D3F4A44C28BB4B2300B46229 /* AchievementGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4A44B28BB4B2300B46229 /* AchievementGroup.swift */; };
+		D3F4A44F28BB592600B46229 /* GameoverModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4A44E28BB592600B46229 /* GameoverModal.swift */; };
+		D3F4A45828BB5F3800B46229 /* HowToPlayText.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4A45728BB5F3800B46229 /* HowToPlayText.swift */; };
+		D3F4A45B28BB5FF900B46229 /* SettingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4A45A28BB5FF900B46229 /* SettingButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +66,7 @@
 		B437864228B72E5E005210F1 /* LeaderboardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardScreen.swift; sourceTree = "<group>"; };
 		B437864428B72E6E005210F1 /* HowToPlayScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayScreen.swift; sourceTree = "<group>"; };
 		B437864B28B7389E005210F1 /* LeaderboardBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardBar.swift; sourceTree = "<group>"; };
-		B437864D28B74174005210F1 /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
+		B437864D28B74174005210F1 /* ScoreBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreBadge.swift; sourceTree = "<group>"; };
 		B44BB86028B71C58004650B2 /* MenuScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScreen.swift; sourceTree = "<group>"; };
 		D31D0A35289CE20E000682A0 /* HigherOrLower.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HigherOrLower.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D31D0A38289CE20E000682A0 /* HigherOrLowerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HigherOrLowerApp.swift; sourceTree = "<group>"; };
@@ -76,6 +82,12 @@
 		D399298628B8A764004A366D /* GameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScreen.swift; sourceTree = "<group>"; };
 		D399298828B8B02F004A366D /* SettingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreen.swift; sourceTree = "<group>"; };
 		D399298A28B8B9E8004A366D /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		D3F4A44728BB45E300B46229 /* AchievementBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementBadge.swift; sourceTree = "<group>"; };
+		D3F4A44928BB496A00B46229 /* AchievementScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementScreen.swift; sourceTree = "<group>"; };
+		D3F4A44B28BB4B2300B46229 /* AchievementGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementGroup.swift; sourceTree = "<group>"; };
+		D3F4A44E28BB592600B46229 /* GameoverModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameoverModal.swift; sourceTree = "<group>"; };
+		D3F4A45728BB5F3800B46229 /* HowToPlayText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayText.swift; sourceTree = "<group>"; };
+		D3F4A45A28BB5FF900B46229 /* SettingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +135,7 @@
 				B437864428B72E6E005210F1 /* HowToPlayScreen.swift */,
 				D399298628B8A764004A366D /* GameScreen.swift */,
 				D399298828B8B02F004A366D /* SettingScreen.swift */,
+				D3F4A44928BB496A00B46229 /* AchievementScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -140,9 +153,12 @@
 		B437864A28B7388A005210F1 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				B437864B28B7389E005210F1 /* LeaderboardBar.swift */,
-				B437864D28B74174005210F1 /* Badge.swift */,
-				B426067628B8202B00E7523D /* MenuButton.swift */,
+				D3F4A45928BB5FEC00B46229 /* Setting */,
+				D3F4A45328BB5EF500B46229 /* HowToPlay */,
+				D3F4A45228BB5ED300B46229 /* Menu */,
+				D3F4A45128BB5EC600B46229 /* Leaderboard */,
+				D3F4A45028BB5EB500B46229 /* Achievement */,
+				D3F4A44D28BB590100B46229 /* Game */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -205,6 +221,56 @@
 				D31D0A55289CE20F000682A0 /* HigherOrLowerUITestsLaunchTests.swift */,
 			);
 			path = HigherOrLowerUITests;
+			sourceTree = "<group>";
+		};
+		D3F4A44D28BB590100B46229 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				B437864D28B74174005210F1 /* ScoreBadge.swift */,
+				D3F4A44E28BB592600B46229 /* GameoverModal.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		D3F4A45028BB5EB500B46229 /* Achievement */ = {
+			isa = PBXGroup;
+			children = (
+				D3F4A44728BB45E300B46229 /* AchievementBadge.swift */,
+				D3F4A44B28BB4B2300B46229 /* AchievementGroup.swift */,
+			);
+			path = Achievement;
+			sourceTree = "<group>";
+		};
+		D3F4A45128BB5EC600B46229 /* Leaderboard */ = {
+			isa = PBXGroup;
+			children = (
+				B437864B28B7389E005210F1 /* LeaderboardBar.swift */,
+			);
+			path = Leaderboard;
+			sourceTree = "<group>";
+		};
+		D3F4A45228BB5ED300B46229 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				B426067628B8202B00E7523D /* MenuButton.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		D3F4A45328BB5EF500B46229 /* HowToPlay */ = {
+			isa = PBXGroup;
+			children = (
+				D3F4A45728BB5F3800B46229 /* HowToPlayText.swift */,
+			);
+			path = HowToPlay;
+			sourceTree = "<group>";
+		};
+		D3F4A45928BB5FEC00B46229 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				D3F4A45A28BB5FF900B46229 /* SettingButton.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -344,13 +410,19 @@
 			files = (
 				D399298928B8B02F004A366D /* SettingScreen.swift in Sources */,
 				D399298728B8A764004A366D /* GameScreen.swift in Sources */,
-				B437864E28B74174005210F1 /* Badge.swift in Sources */,
+				B437864E28B74174005210F1 /* ScoreBadge.swift in Sources */,
 				B437864528B72E6E005210F1 /* HowToPlayScreen.swift in Sources */,
 				B426067728B8202B00E7523D /* MenuButton.swift in Sources */,
+				D3F4A44A28BB496A00B46229 /* AchievementScreen.swift in Sources */,
+				D3F4A45B28BB5FF900B46229 /* SettingButton.swift in Sources */,
+				D3F4A44828BB45E300B46229 /* AchievementBadge.swift in Sources */,
+				D3F4A44C28BB4B2300B46229 /* AchievementGroup.swift in Sources */,
 				B437864C28B7389E005210F1 /* LeaderboardBar.swift in Sources */,
 				B426067928B82E6000E7523D /* PlaySound.swift in Sources */,
 				D399298B28B8B9E8004A366D /* Enums.swift in Sources */,
 				B44BB86128B71C58004650B2 /* MenuScreen.swift in Sources */,
+				D3F4A44F28BB592600B46229 /* GameoverModal.swift in Sources */,
+				D3F4A45828BB5F3800B46229 /* HowToPlayText.swift in Sources */,
 				D31D0A69289CEABD000682A0 /* Modifiers.swift in Sources */,
 				D31D0A3B289CE20E000682A0 /* ContentView.swift in Sources */,
 				D31D0A39289CE20E000682A0 /* HigherOrLowerApp.swift in Sources */,
