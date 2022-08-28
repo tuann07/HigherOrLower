@@ -109,8 +109,10 @@ struct GameScreen: View {
     // save highscore to leaderboard
     func saveToLeaderboard() {
         var leaderboard = UserDefaults.standard.object(forKey: "leaderboard") as? [String: Int] ?? [:]
-        leaderboard[self.username] = self.playingHighscore
-        UserDefaults.standard.set(leaderboard, forKey: "leaderboard")
+        if leaderboard[self.username] ?? 0 < self.playingHighscore {
+            leaderboard[self.username] = self.playingHighscore
+            UserDefaults.standard.set(leaderboard, forKey: "leaderboard")
+        }
     }
     
     // reset game
