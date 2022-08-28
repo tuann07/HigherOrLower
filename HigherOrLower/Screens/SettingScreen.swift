@@ -45,7 +45,7 @@ struct SettingScreen: View {
                         Button {
                             difficulty = Difficulty.easy
                         } label: {
-                            SettingButton(text: "Easy", difficulty: Difficulty.easy)
+                            SettingButton(text: "Easy", selected: difficulty == Difficulty.easy)
                         }
                         
                         Spacer()
@@ -53,7 +53,7 @@ struct SettingScreen: View {
                         Button {
                             difficulty = Difficulty.hard
                         } label: {
-                            SettingButton(text: "Hard", difficulty: Difficulty.hard)
+                            SettingButton(text: "Hard", selected: difficulty == Difficulty.hard)
                         }
                         
                         Spacer()
