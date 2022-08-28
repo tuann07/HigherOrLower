@@ -68,7 +68,7 @@ struct GameoverModal: View {
                 } label: {
                     Text("New Game")
                         .fontWeight(.bold)
-                        .foregroundColor(Color("Blue400"))
+                        .foregroundColor(.black.opacity(0.8))
                         .padding(.vertical, 15)
                         .padding(.horizontal, 70)
                         .background(Color("Yellow"))
