@@ -8,6 +8,8 @@
  Created  date: 26/08/2022
  Last modified: 28/08/2022
  Acknowledgement: All images are made by bearicons at flaticon.com
+                Background music "cottagecore" from pixabay.com
+                Sound effects "guess-right", "guess-wrong", "new-highscore", "play-cards", "sad-gameover" from mixkit.co
  */
 
 import SwiftUI
@@ -16,11 +18,11 @@ let iconList = ["ace", "two", "three", "four", "five", "six", "seven", "eight", 
 let baseBet = 10
 
 struct GameScreen: View {
-    @AppStorage(AppStorageKeys.difficulty.rawValue) private var difficulty = Difficulty.easy
-    @AppStorage(AppStorageKeys.username.rawValue) private var username = usernameDefault
-    @AppStorage(AppStorageKeys.highscore.rawValue) private var highscore = coinsDefault
-    @AppStorage(AppStorageKeys.playingHighscore.rawValue) private var playingHighscore = coinsDefault
-    @AppStorage(AppStorageKeys.coins.rawValue) private var coins = coinsDefault
+    @AppStorage(AppStorageKeys.difficulty) private var difficulty = Difficulties.easy
+    @AppStorage(AppStorageKeys.username) private var username = DefaultValues.username
+    @AppStorage(AppStorageKeys.highscore) private var highscore = DefaultValues.coins
+    @AppStorage(AppStorageKeys.playingHighscore) private var playingHighscore = DefaultValues.coins
+    @AppStorage(AppStorageKeys.coins) private var coins = DefaultValues.coins
     @State private var bets = 10
     
     @State private var playerCards = [0, 1, 2]
@@ -108,10 +110,10 @@ struct GameScreen: View {
     
     // save highscore to leaderboard
     func saveToLeaderboard() {
-        var leaderboard = UserDefaults.standard.object(forKey: "leaderboard") as? [String: Int] ?? [:]
+        var leaderboard = UserDefaults.standard.object(forKey: AppStorageKeys.leaderboard) as? [String: Int] ?? [:]
         if leaderboard[self.username] ?? 0 < self.playingHighscore {
             leaderboard[self.username] = self.playingHighscore
-            UserDefaults.standard.set(leaderboard, forKey: "leaderboard")
+            UserDefaults.standard.set(leaderboard, forKey: AppStorageKeys.leaderboard)
         }
     }
     
@@ -120,8 +122,8 @@ struct GameScreen: View {
         self.saveToLeaderboard()
         self.updateHighscore()
         self.isGameover = false
-        self.coins = coinsDefault
-        self.playingHighscore = coinsDefault
+        self.coins = DefaultValues.coins
+        self.playingHighscore = DefaultValues.coins
     }
     
     // bets change
@@ -151,7 +153,7 @@ struct GameScreen: View {
         return playingHighscore > highscore
     }
     func isHardMode() -> Bool {
-        return difficulty == Difficulty.hard
+        return difficulty == Difficulties.hard
     }
     
     var body: some View {

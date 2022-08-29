@@ -13,8 +13,8 @@
 import SwiftUI
 
 struct SettingScreen: View {
-    @AppStorage(AppStorageKeys.username.rawValue) private var username = usernameDefault
-    @AppStorage(AppStorageKeys.difficulty.rawValue) private var difficulty = Difficulty.easy
+    @AppStorage(AppStorageKeys.username) private var username = DefaultValues.username
+    @AppStorage(AppStorageKeys.difficulty) private var difficulty = Difficulties.easy
     
     var body: some View {
         ZStack {
@@ -43,17 +43,17 @@ struct SettingScreen: View {
                         Spacer()
                         
                         Button {
-                            difficulty = Difficulty.easy
+                            difficulty = Difficulties.easy
                         } label: {
-                            SettingButton(text: "Easy", selected: difficulty == Difficulty.easy)
+                            SettingButton(text: "Easy", selected: difficulty == Difficulties.easy)
                         }
                         
                         Spacer()
                         
                         Button {
-                            difficulty = Difficulty.hard
+                            difficulty = Difficulties.hard
                         } label: {
-                            SettingButton(text: "Hard", selected: difficulty == Difficulty.hard)
+                            SettingButton(text: "Hard", selected: difficulty == Difficulties.hard)
                         }
                         
                         Spacer()

@@ -13,8 +13,8 @@
 import SwiftUI
 
 struct MenuScreen: View {
-    @AppStorage(AppStorageKeys.coins.rawValue) private var coins = coinsDefault
-    @AppStorage(AppStorageKeys.playingHighscore.rawValue) private var playingHighscore = coinsDefault
+    @AppStorage(AppStorageKeys.coins) private var coins = DefaultValues.coins
+    @AppStorage(AppStorageKeys.playingHighscore) private var playingHighscore = DefaultValues.coins
     
     var body: some View {
         NavigationView {
@@ -39,8 +39,8 @@ struct MenuScreen: View {
                     NavigationLink {
                         GameScreen()
                             .onAppear(perform: {
-                                coins = coinsDefault
-                                playingHighscore = coinsDefault
+                                coins = DefaultValues.coins
+                                playingHighscore = DefaultValues.coins
                             })
                     } label: {
                         MenuButton(text: "New Game")

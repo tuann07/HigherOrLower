@@ -12,20 +12,22 @@
 
 import Foundation
 
-enum Difficulty: Int {
+enum Difficulties: Int {
     case easy = 1
     case hard = 2
 }
 
-enum AppStorageKeys: String {
-    case highscore = "highscore"
-    case playingHighscore = "playing-highscore"
-    case coins = "coins"
-    case leaderboard = "leaderboard"
-    case username = "username"
-    case difficulty = "difficulty"
+struct AppStorageKeys {
+    static let highscore = "highscore"
+    static let playingHighscore = "playing-highscore"
+    static let coins = "coins"
+    static let leaderboard = "leaderboard"
+    static let username = "username"
+    static let difficulty = "difficulty"
 }
 
-let coinsDefault = 100
-let usernameDefault = "player1"
-let difficultyDefault = Difficulty.easy
+struct DefaultValues {
+    static let coins = 100
+    static let username = "player1"
+    static let difficulty = Difficulties.easy
+}
